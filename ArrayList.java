@@ -102,24 +102,19 @@ public class ArrayList<E> implements Lista<E> {
 
 ////////////////////////////////////////////////////////////////////////
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@Override
+public void agregarElemento(E e) {
+agregarFinal(e);
+}
 
 ///////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
     //Un Iterator : Permite recorrer la lista usando un Iterator.
         // Un Iterator es un objeto que permite recorrer una colección
     // elemento por elemento, sin necesidad de acceder directamente
