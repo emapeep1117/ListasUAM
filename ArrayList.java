@@ -139,31 +139,20 @@ throw new IndexOutOfBoundsException();
 E eliminado = (E) datos[indice - 1];
 datos[indice-1] = null;
 indice--;
+asegurarGC();
 return eliminado;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 @Override
-public E eliminarElemento(int pos) {
-Object[] aux = new Object[datos.length];
-if (indice == 0) {
-throw new IndexOutOfBoundsException();
-}
-if (pos>=0 && pos<=indice) {
-E eliminado = (E) datos[pos];
-System.arraycopy(datos, 0, aux, 0, pos);
-System.arraycopy(datos, pos+1, aux, pos, indice-pos-1);
-datos=aux;
-asegurarGC();
-indice--;
-return eliminado;
-}
-throw new IndexOutOfBoundsException();
+public E eliminarElemento() {
+return eliminarElementoFinal();
 }
 
 ///////////////////////////////////////////////////////////////////////
 
+@Override
 public E eliminarElementoInicio() {
 if (indice == 0) {
 throw new IndexOutOfBoundsException();
@@ -179,10 +168,37 @@ asegurarGC();
 return eliminado;
 }
 
+//////////////////////////////////////////////////////////////////////
 
+@Override
+public E eliminarElementoPosicion(int posicion) {
+if (indice == 0) {
+throw new IndexOutOfBoundsException();
+}
+if (posicion < 0 || posicion >= indice) {
+throw new IndexOutOfBoundsException();
+}
+if (posicion == 0) {
+return eliminarElementoInicio();
+}
+if (posicion == indice - 1) {
+return eliminarElementoFinal();
+}
+E eliminado = (E) datos[posicion];
+for (int i = posicion; i < indice - 1; i++) {
+datos[i] = datos[i + 1];
+}
+datos[indice - 1] = null;
+indice--;
+asegurarGC();
+return eliminado;
+}
+
+///////////////////////////////////////////////////////////////////////
 
 
 //////////////////////////////////////////////////////////////////////
+
     //Un Iterator : Permite recorrer la lista usando un Iterator.
         // Un Iterator es un objeto que permite recorrer una colección
     // elemento por elemento, sin necesidad de acceder directamente
