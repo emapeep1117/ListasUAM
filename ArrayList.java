@@ -139,7 +139,6 @@ throw new IndexOutOfBoundsException();
 E eliminado = (E) datos[indice - 1];
 datos[indice-1] = null;
 indice--;
-asegurarGC();
 return eliminado;
 }
 
@@ -164,7 +163,6 @@ datos[i] = datos[i+1];
 
 datos[indice-1] = null;
 indice--;
-asegurarGC();
 return eliminado;
 }
 
@@ -190,11 +188,19 @@ datos[i] = datos[i + 1];
 }
 datos[indice - 1] = null;
 indice--;
-asegurarGC();
 return eliminado;
 }
 
 ///////////////////////////////////////////////////////////////////////
+@Override
+public E[] convertirArreglo() {
+Object[] aux = new Object[indice];
+
+for (int i = 0; i < indice; i++) {
+aux[i] = datos[i];
+}
+return (E[]) aux;
+}
 
 
 //////////////////////////////////////////////////////////////////////
