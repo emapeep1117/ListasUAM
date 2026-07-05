@@ -192,14 +192,18 @@ return eliminado;
 }
 
 ///////////////////////////////////////////////////////////////////////
-@Override
-public E[] convertirArreglo() {
-Object[] aux = new Object[indice];
 
-for (int i = 0; i < indice; i++) {
-aux[i] = datos[i];
-}
-return (E[]) aux;
+@Override
+@SuppressWarnings("unchecked")
+public E[] convertirArreglo() {
+    if (indice == 0) {
+        return (E[]) new Object[0];
+    }
+    E[] aux = (E[]) java.lang.reflect.Array.newInstance(datos[0].getClass(), indice);
+    for (int i = 0; i < indice; i++) {
+        aux[i] = (E) datos[i];
+    }
+    return aux;
 }
 
 /////////////////////////////////////////////////////////////////////
