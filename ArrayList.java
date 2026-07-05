@@ -114,7 +114,6 @@ public void agregarPosicion(E e, int pos) {
 Object[] aux = null;
 
 if(pos>=0 && pos<=indice){
-
 if(indice==datos.length){
 aux=new Object[(int)(1.5*datos.length)];
 System.arraycopy(datos, 0, aux, 0, pos);
@@ -133,20 +132,42 @@ throw new IndexOutOfBoundsException();
 /////////////////////////////////////////////////////////////////////////
 
 @Override
-public E eliminarElemento() {
+public E eliminarElementoFinal() {
 if (indice == 0) {
 throw new IndexOutOfBoundsException();
 }
 E eliminado = (E) datos[indice - 1];
 datos[indice-1] = null;
 indice--;
-return eliminado;;
+return eliminado;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
+@Override
+public E eliminarElemento(int pos) {
+Object[] aux = new Object[datos.length];
+if (indice == 0) {
+throw new IndexOutOfBoundsException();
+}
+if (pos>=0 && pos<=indice) {
+E eliminado = (E) datos[pos];
+System.arraycopy(datos, 0, aux, 0, pos);
+System.arraycopy(datos, pos+1, aux, pos, indice-pos-1);
+asegurarGC();
+datos=aux;
+indice--;
+return eliminado;
+}
+throw new IndexOutOfBoundsException();
+}
 
 
+
+
+
+
+///////////////////////////////////////////////////////////////////////
 
     //Un Iterator : Permite recorrer la lista usando un Iterator.
         // Un Iterator es un objeto que permite recorrer una colección
