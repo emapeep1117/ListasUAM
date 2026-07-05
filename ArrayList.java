@@ -154,21 +154,35 @@ if (pos>=0 && pos<=indice) {
 E eliminado = (E) datos[pos];
 System.arraycopy(datos, 0, aux, 0, pos);
 System.arraycopy(datos, pos+1, aux, pos, indice-pos-1);
-asegurarGC();
 datos=aux;
+asegurarGC();
 indice--;
 return eliminado;
 }
 throw new IndexOutOfBoundsException();
 }
 
-
-
-
-
-
 ///////////////////////////////////////////////////////////////////////
 
+public E eliminarElementoInicio() {
+if (indice == 0) {
+throw new IndexOutOfBoundsException();
+}
+E eliminado = (E) datos[0];
+for (int i=0; i<indice-1; i++) {
+datos[i] = datos[i+1];
+}
+
+datos[indice-1] = null;
+indice--;
+asegurarGC();
+return eliminado;
+}
+
+
+
+
+//////////////////////////////////////////////////////////////////////
     //Un Iterator : Permite recorrer la lista usando un Iterator.
         // Un Iterator es un objeto que permite recorrer una colección
     // elemento por elemento, sin necesidad de acceder directamente
