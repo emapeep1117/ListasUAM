@@ -109,8 +109,41 @@ agregarFinal(e);
 
 ///////////////////////////////////////////////////////////////////////
 
+@Override
+public void agregarPosicion(E e, int pos) {
+Object[] aux = null;
+
+if(pos>=0 && pos<=indice){
+if(indice==datos.length){
+aux=new Object[(int)(1.5*datos.length)];
+}
+System.arraycopy(datos, 0, aux, 0, pos);
+System.arraycopy(datos, pos, aux,  pos+1, indice-pos);
+datos=aux;
+} else {
+System.arraycopy(datos, pos, datos, pos+1, indice-pos);
+}
+datos[pos]=e;
+indice++;
+} else {
+throw new IndexOutOfBoundsException();
+}
+}
+
+/////////////////////////////////////////////////////////////////////////
+
+@Override
+public void eliminarElemento(E e) {
+int pos = -1;
+for(int i=0; i<indice; i++) {
 
 
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
 
 
 
