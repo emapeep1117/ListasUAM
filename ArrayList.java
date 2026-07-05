@@ -202,9 +202,19 @@ aux[i] = datos[i];
 return (E[]) aux;
 }
 
+/////////////////////////////////////////////////////////////////////
 
-//////////////////////////////////////////////////////////////////////
+@Override
+public E consultar(int posicion) {
+if (posicion < 0 || posicion >= indice) {
+throw new IndexOutOfBoundsException();
+}
 
+return (E) datos[posicion];
+}
+
+
+/////////////////////////////////////////////////////////////////////
     //Un Iterator : Permite recorrer la lista usando un Iterator.
         // Un Iterator es un objeto que permite recorrer una colección
     // elemento por elemento, sin necesidad de acceder directamente
